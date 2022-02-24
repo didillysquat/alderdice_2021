@@ -1,0 +1,65 @@
+---
+output: 
+  pdf_document: 
+fontsize: 10pt
+---
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggtree)
+library(treeio)
+```
+```{r echo=FALSE, results='asis', fig.height=7, fig.width=9}
+tree <- read.tree("OG0001506_tree.txt") #CA9 example, change accordingly
+
+tree$tip.label=gsub("_NONE", "", tree$tip.label)
+tree$tip.label=gsub("fa_longest-variant_pep_", "", tree$tip.label)
+tree$tip.label=gsub("Spis_genome_annotation_pep_longest_", "", tree$tip.label)
+tree$tip.label=gsub("pdam_proteins_", "", tree$tip.label)
+tree$tip.label=gsub("Pver_proteins_names_v1_0_", "", tree$tip.label)
+tree$tip.label=gsub("plut2v1_1_proteins_", "", tree$tip.label)
+tree$tip.label=gsub("Acropora-nasta_anas_", "", tree$tip.label)
+tree$tip.label=gsub("Acropora-florida_aflo_", "", tree$tip.label)
+tree$tip.label=gsub("Acropora-echinata_aech_", "", tree$tip.label)
+tree$tip.label=gsub("Montipora-efflorescens_meff_", "", tree$tip.label)
+tree$tip.label=gsub("Montipora-cactus_mcac_", "", tree$tip.label)
+tree$tip.label=gsub("Acropora-yongei_ayon_", "", tree$tip.label)
+tree$tip.label=gsub("Acropora-tenuis_aten_", "", tree$tip.label)
+tree$tip.label=gsub("Acropora-gemmifera_agem_", "", tree$tip.label)
+tree$tip.label=gsub("Acropora-awi_aawi_", "", tree$tip.label)
+tree$tip.label=gsub("Acropora-microphthalma_amic_", "", tree$tip.label)
+tree$tip.label=gsub("Acropora-acuminata_aacu_", "", tree$tip.label)
+tree$tip.label=gsub("Acropora-hyacinthus_ahya_", "", tree$tip.label)
+tree$tip.label=gsub("Acropora-cytherea_acyt_", "", tree$tip.label)
+tree$tip.label=gsub("Acropora-selago_asel_", "", tree$tip.label)
+tree$tip.label=gsub("Acropora-muricata_amur_", "", tree$tip.label)
+tree$tip.label=gsub("Astreopora-spp_astr_", "", tree$tip.label)
+tree$tip.label=gsub("Amil_all_maker_proteins_", "", tree$tip.label)
+tree$tip.label=gsub("Acropora-digitifera_adig_", "", tree$tip.label)
+tree$tip.label=gsub("Acropora-intermedia_aint_", "", tree$tip.label)
+tree$tip.label=gsub("Mcavernosa_maker_proteins_", "", tree$tip.label)
+tree$tip.label=gsub("-RA", "", tree$tip.label)
+
+tip <- get.tree(tree)$tip.label
+#change highlight species accordingly
+highlight <-list("Rest"=tip[grep("acyt|aech|Amill|ahya|amur|asel|anas|aacu|adig|amic|aten|ayon|aawi|agem|aflo|aint|meff|astr|mcac|Spis|pdam|Pver", tip)], 
+                  "Plut"= tip[grep("plut", tip)],
+                  "Mcav"= tip[grep("Mcav", tip)])
+tree <- groupOTU(tree, highlight)
+
+#change node numbers accordingly
+ggtree(tree, size=1, aes(color=group)) +
+  geom_tiplab(align=FALSE, offset = 0.01) +
+  geom_hilight(node=74, fill= "paleturquoise1", extend= 0.4) +
+  geom_hilight(node=82, fill= "paleturquoise1", extend= 0.4) +
+  geom_hilight(node=81, fill= "paleturquoise1", extend= 0.4) +
+  geom_hilight(node=78, fill= "#FFCC99", extend= 0.4) +
+  geom_cladelabel(node=74, label="", color="turquoise3", offset=0.22, align=TRUE, barsize=1.5, fontsize=5)+ #44AA99
+  geom_cladelabel(node=82, label="Plut", color="turquoise3", offset=0.22, align=TRUE, barsize=1.5, fontsize=5)+
+  geom_cladelabel(node=81, label="", color="turquoise3", offset=0.22, align=TRUE, barsize=1.5, fontsize=5)+
+  geom_cladelabel(node=78, label="Mcav", color="#FF6600", offset=0.4, align=TRUE, barsize=1.5, fontsize=5)+
+  scale_color_manual(values=c("turquoise3", "#FF6600", "#006600", "black"), breaks=c("Plut", "Mcav"), guide=guide_legend("Gene Expansion Group")) +
+  theme(legend.position ='right') + 
+  geom_tippoint()+
+  #geom_text(aes(label=node), hjust=-.3)+ #use to check node numbers
+  xlim(0,1.6)
+```
