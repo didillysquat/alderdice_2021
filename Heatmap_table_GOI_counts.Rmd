@@ -1,0 +1,20 @@
+---
+output: "html_document"
+classoption: "landscape"
+fontsize: 12pt
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ztable)
+library(magrittr)
+options(ztable.type = "html")
+```
+
+```{r echo = FALSE, results='asis'}
+cnts=read.table("Orthogroups _goi_counts.csv ", header=TRUE, row.names = 1, sep = ",")
+col_order=c("gene", "mcav", "spis", "pdam", "pver", "plut", "astr", "meff", "mcac", "aten", "ayon", "aint", "agem", "aflo", "aawi", "adig", "aacu", "amic", "anas", "amil", "asel", "ahya", "acyt", "aech", "amur", "Total", "var")
+cnts=cnts[, col_order]
+z=ztable((cnts), align="cc|cccccccccccccccccccccccc|cc", caption= "Heatmap table of gene counts of goi across 24 coral gene sets.", caption.position = "l") 
+z %>% makeHeatmap(palette= "Blues", cols = c(2:25)) 
+```
