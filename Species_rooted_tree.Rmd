@@ -1,0 +1,48 @@
+---
+output: 
+  pdf_document: 
+fontsize: 10pt
+---
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggtree)
+```
+```{r echo=FALSE, results='asis', fig.height=7, fig.width=9}
+tree <- read.tree("SpeciesTree_rooted_node_labels.txt")
+tree$tip.label=gsub("Mcavernosa.maker.proteins", "Montrastrea_cavernosa", tree$tip.label)
+tree$tip.label=gsub("Pver_proteins_names_v1.0", "Pocillopora_verrucosa", tree$tip.label)
+tree$tip.label=gsub("plut2v1.1.proteins", "Porites_lutea", tree$tip.label)
+tree$tip.label=gsub("Montipora-efflorescens_meff.fa.longest-variant.pep", "Montipora_efflorescens", tree$tip.label)
+tree$tip.label=gsub("Acropora-tenuis_aten.fa.longest-variant.pep", "Acropora_tenuis", tree$tip.label)
+tree$tip.label=gsub("Acropora-gemmifera_agem.fa.longest-variant.pep", "Acropora_gemmifera", tree$tip.label)
+tree$tip.label=gsub("Acropora-awi_aawi.fa.longest-variant.pep", "Acropora_awi", tree$tip.label)
+tree$tip.label=gsub("Amil.all.maker.proteins", "Acropora millepora", tree$tip.label)
+tree$tip.label=gsub("Acropora-hyacinthus_ahya.fa.longest-variant.pep", "Acropora_hyacinthus", tree$tip.label)
+tree$tip.label=gsub("Acropora-echinata_aech.fa.longest-variant.pep", "Acropora_echinata", tree$tip.label)
+tree$tip.label=gsub("Acropora-digitifera_adig.fa.longest-variant.pep", "Acropora_digitifera", tree$tip.label)
+tree$tip.label=gsub("Acropora-microphthalma_amic.fa.longest-variant.pep", "Acropora_microphthalma", tree$tip.label)
+tree$tip.label=gsub("pdam_proteins", "Pocillopora_damicornis", tree$tip.label)
+tree$tip.label=gsub("Spis.genome.annotation.pep.longest", "Stylophora pistillata", tree$tip.label)
+tree$tip.label=gsub("Astreopora-spp_astr.fa.longest-variant.pep", "Astreopora_myriophthalma", tree$tip.label)
+tree$tip.label=gsub("Montipora-cactus_mcac.fa.longest-variant.pep", "Montipora_cactus", tree$tip.label)
+tree$tip.label=gsub("Acropora-yongei_ayon.fa.longest-variant.pep", "Acropora_yongei", tree$tip.label)
+tree$tip.label=gsub("Acropora-florida_aflo.fa.longest-variant.pep", "Acropora_florida", tree$tip.label)
+tree$tip.label=gsub("Acropora-intermedia_aint.fa.longest-variant.pep", "Acropora_intermedia", tree$tip.label)
+tree$tip.label=gsub("Acropora-selago_asel.fa.longest-variant.pep", "Acropora_selago", tree$tip.label)
+tree$tip.label=gsub("Acropora-cytherea_acyt.fa.longest-variant.pep", "Acropora_cytherea", tree$tip.label)
+tree$tip.label=gsub("Acropora-muricata_amur.fa.longest-variant.pep", "Acropora_muricata", tree$tip.label)
+tree$tip.label=gsub("Acropora-acuminata_aacu.fa.longest-variant.pep", "Acropora_acuminata", tree$tip.label)
+tree$tip.label=gsub("Acropora-nasta_anas.fa.longest-variant.pep", "Acropora_nasta", tree$tip.label)
+
+ggtree(tree, size=1) + 
+  theme(legend.position="right") + 
+  geom_tippoint()+
+  geom_hilight(node=33, fill= "maroon", extendto=0.5) +
+  geom_hilight(node=32, fill= "lightgreen", extendto= 0.5) +
+  geom_hilight(node=6, fill= "wheat", extendto= 0.5) +
+  geom_hilight(node=5, fill= "lightskyblue", extendto= 0.5) +
+  geom_hilight(node=28, fill= "orchid3", extendto= 0.5) +
+  geom_hilight(node=1, fill= "sienna1", extendto= 0.5) +
+  geom_hilight(node=4, fill= "pink", extendto= 0.5) +
+  xlim(0,0.9)
+```
