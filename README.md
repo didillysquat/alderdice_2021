@@ -1,4 +1,17 @@
-# alderdice_2021
+# alderdice_2022
+
+### Project Publication
+Results and Interpretations from these analyses are published open access here:
+https://doi.org/10.3389/fmars.2022.834332
+
+Full citation:
+Alderdice R, Hume BCC, Kühl M, Pernice M, Suggett DJ, Voolstra CR. Disparate inventories of hypoxia gene sets across corals align with inferred environmental resilience. Front Mar Sci. 2022;9. doi:10.3389/fmars.2022.834332
+
+OrthoFinder analyes are avavilable here:
+https://zenodo.org/record/6396671#.YoYpoS8RoZg
+
+Full citation:
+Rachel Alderdice, Christian Voolstra, Benjamin Hume, David Suggett, Mathieu Pernice, & Michael Kuhl. (2022). Data from 'Disparate inventories of hypoxia gene sets across corals align with inferred environmental resilience' [Data set]. Zenodo. https://doi.org/10.5281/zenodo.6396671
 
 ### Project Summary
 We used an ortholog-based meta-analysis to investigate how hypoxia gene inventories 
